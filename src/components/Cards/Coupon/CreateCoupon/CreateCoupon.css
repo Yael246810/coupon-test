@@ -1,0 +1,72 @@
+/* Main container for the form */
+.create-coupon-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the form title */
+.create-coupon-form h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Styling for the form input fields */
+.create-coupon-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Styling for the submit button */
+.create-coupon-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the button */
+.create-coupon-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Optional: Add some space between the form fields and button */
+.create-coupon-form input[type="number"],
+.create-coupon-form input[type="date"] {
+    width: calc(50% - 10px);
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.create-coupon-form input[type="number"]:last-child,
+.create-coupon-form input[type="date"]:last-child {
+    margin-right: 0;
+}
+
+/* Error message styling (if needed) */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* Optional: Add some spacing between form fields */
+.create-coupon-form input:focus {
+    border-color: #007bff;
+}
