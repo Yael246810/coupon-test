@@ -18,15 +18,16 @@ function CouponManager() {
   }, []);
 
   const handleSaveCoupon = (newCoupon) => {
-    if (newCoupon.id) {
-      setCoupons((prevCoupons) =>
-        prevCoupons.map((coupon) =>
-          coupon.id === newCoupon.id ? newCoupon : coupon
-        )
-      );
-    } else {
-      setCoupons((prevCoupons) => [...prevCoupons, newCoupon]);
-    }
+    console.log("handleSaveCoupon");
+    // if (newCoupon.id) {
+    //   setCoupons((prevCoupons) =>
+    //     prevCoupons.map((coupon) =>
+    //       coupon.id === newCoupon.id ? newCoupon : coupon
+    //     )
+    //   );
+    // } else {
+    //   setCoupons((prevCoupons) => [...prevCoupons, newCoupon]);
+    // }
   };
 
   const handleAddCoupon = (id) => {
@@ -49,8 +50,8 @@ function CouponManager() {
   }, [selectedCouponId, navigate]); // Dependency array makes sure this runs when selectedCouponId changes
 
   const handleUpdateCoupon = (id) => {
-    console.log("this is the couponId " + id);
-    navigate("/admin/coupons/coupon/update");
+    console.log("update - this is the couponId " + id);
+    navigate(`/admin/coupons/${id}/update`);
   };
   return (
     <div>

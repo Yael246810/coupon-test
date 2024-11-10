@@ -24,12 +24,8 @@ class WebApiService {
     return axios.delete(`${UrlService.admin}/coupons/${id}/delete`);
   }
 
-  updateCoupon(coupon) {
-    return axios.put(
-      `${UrlService.auth.admin}/coupons/coupon/update`,
-      coupon,
-      authService.getHeaders()
-    );
+  updateCoupon(id) {
+    return axios.put(`${UrlService.admin}/coupons/${id}/update`, id);
   }
 
   // Function to add a new user (Customer)

@@ -11,7 +11,7 @@ function DeleteCoupon({ couponId, onSave, onDelete }) {
 
   // Fetch coupon details when component mounts or couponId changes
   const id = Number(couponId);
-  console.log("id after Number is " + id);
+  console.log("delete - id after Number is " + id);
   useEffect(() => {
     if (couponId) {
       setLoading(true);

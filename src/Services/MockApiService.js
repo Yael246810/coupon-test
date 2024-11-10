@@ -64,6 +64,8 @@ class MockApiService {
     this.mock
       .onPut(new RegExp(`${UrlService.admin}/coupons/\\d+/update`))
       .reply((config) => {
+        console.log("mocking update response");
+
         const couponId = config.url.split("/").pop();
         const updatedCouponData = JSON.parse(config.data);
 
@@ -80,7 +82,7 @@ class MockApiService {
         });
 
         if (!couponFound) {
-          return [404, { message: "Coupon not found" }];
+          return [404, { message: "Coupon not found" }]; // It falls here, the Update Coupon. To check what to do with it.
         }
 
         return [

@@ -65,7 +65,7 @@ function CouponList({
                   size="small"
                   variant="outlined"
                   color="secondary"
-                  onClick={onUpdateCoupon}
+                  onClick={() => onUpdateCoupon(Number(coupon.id))}
                 >
                   Update
                 </Button>
