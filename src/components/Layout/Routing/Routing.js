@@ -37,7 +37,7 @@ function Routing() {
         )}
         {AdminFlag && (
           <Route
-            path="/admin/coupons/coupon/update"
+            path="/admin/coupons/:couponId/update"
             element={<UpdateCoupon />}
           />
         )}

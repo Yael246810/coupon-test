@@ -20,7 +20,7 @@ function UpdateCoupon({ couponId = null, onSave }) {
     if (couponId) {
       setLoading(true);
       axios
-        .get(`${UrlService.admin}/coupon/${couponId}`) // Replace with your endpoint
+        .get(`${UrlService.admin}/coupons/${couponId}/update`) // Replace with your endpoint
         .then((response) => {
           setCoupon(response.data);
           setLoading(false);

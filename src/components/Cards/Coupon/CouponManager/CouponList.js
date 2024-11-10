@@ -46,7 +46,7 @@ function CouponList({
               )}
               <CardContent>
                 <Typography variant="h6" component="div">
-                  {coupon.category}
+                  {coupon.id}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Value: {coupon.value}
@@ -57,7 +57,7 @@ function CouponList({
                   size="small"
                   variant="contained"
                   color="primary"
-                  onClick={onDeleteCoupon}
+                  onClick={() => onDeleteCoupon(Number(coupon.id))} // Pass the coupon ID here
                 >
                   Delete
                 </Button>

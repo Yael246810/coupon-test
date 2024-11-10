@@ -20,10 +20,8 @@ class WebApiService {
   }
 
   deleteCoupon(id) {
-    return axios.delete(
-      `${UrlService.auth.admin}/coupons/${id}/delete`,
-      authService.getHeaders()
-    );
+    console.log("delete web coupon: " + id);
+    return axios.delete(`${UrlService.admin}/coupons/${id}/delete`);
   }
 
   updateCoupon(coupon) {

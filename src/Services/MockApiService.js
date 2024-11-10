@@ -41,7 +41,7 @@ class MockApiService {
     });
 
     this.mock
-      .onDelete(UrlService.admin + "/coupons/:id/delete")
+      .onDelete(new RegExp(`${UrlService.admin}/coupons/\\d+/delete`))
       .reply((config) => {
         const couponId = config.url.split("/").pop();
 
@@ -62,7 +62,7 @@ class MockApiService {
       });
 
     this.mock
-      .onPut(UrlService.admin + "/coupons/:id/update")
+      .onPut(new RegExp(`${UrlService.admin}/coupons/\\d+/update`))
       .reply((config) => {
         const couponId = config.url.split("/").pop();
         const updatedCouponData = JSON.parse(config.data);

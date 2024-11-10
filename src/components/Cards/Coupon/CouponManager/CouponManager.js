@@ -3,14 +3,17 @@ import CouponList from "./CouponList"; // Import the CouponList
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import MockApiService from "../../../../Services/MockApiService";
+import DeleteCoupon from "../DeleteCoupon/DeleteCoupon";
 
 function CouponManager() {
   const [coupons, setCoupons] = useState([]);
+  const [selectedCouponId, setSelectedCouponId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     MockApiService.getCoupons().then((fetchedCoupons) => {
       setCoupons(fetchedCoupons);
+      console.log(coupons);
     });
   }, []);
 
@@ -32,8 +35,18 @@ function CouponManager() {
 
   //added now
   const handleDeleteCoupon = (id) => {
-    navigate(`/admin/coupons/${id}/delete`);
+    const couponId = Number(id);
+    setSelectedCouponId(Number(couponId)); // Update the state
+    console.log("1 Selected coupon id is: " + couponId);
+    //navigate(`/admin/coupons/${couponId}/delete`); // Perform the navigation immediately with the id
   };
+
+  useEffect(() => {
+    if (selectedCouponId !== null) {
+      console.log("2 Selected coupon id is: " + selectedCouponId);
+      navigate(`/admin/coupons/${selectedCouponId}/delete`); // Navigate after the state update
+    }
+  }, [selectedCouponId, navigate]); // Dependency array makes sure this runs when selectedCouponId changes
 
   const handleUpdateCoupon = (id) => {
     console.log("this is the couponId " + id);
@@ -49,6 +62,7 @@ function CouponManager() {
         onUpdateCoupon={handleUpdateCoupon}
         onSave={handleSaveCoupon}
       />
+      <DeleteCoupon couponId={selectedCouponId} />
     </div>
   );
 }
