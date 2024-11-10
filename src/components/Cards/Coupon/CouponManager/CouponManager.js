@@ -6,10 +6,9 @@ import MockApiService from "../../../../Services/MockApiService";
 
 function CouponManager() {
   const [coupons, setCoupons] = useState([]);
-  const navigate = useNavigate(); // Hook to navigate to CreateCoupon page
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch initial list of coupons
     MockApiService.getCoupons().then((fetchedCoupons) => {
       setCoupons(fetchedCoupons);
     });
@@ -28,16 +27,17 @@ function CouponManager() {
   };
 
   const handleAddCoupon = (id) => {
-    navigate("/admin/coupons/add"); // Navigate to CreateCoupon page
+    navigate("/admin/coupons/add");
   };
 
   //added now
   const handleDeleteCoupon = (id) => {
-    navigate(`/admin/coupons/${id}`);
+    navigate(`/admin/coupons/${id}/delete`);
   };
 
   const handleUpdateCoupon = (id) => {
-    navigate("/admin/coupons/coupon");
+    console.log("this is the couponId " + id);
+    navigate("/admin/coupons/coupon/update");
   };
   return (
     <div>
@@ -47,6 +47,7 @@ function CouponManager() {
         onAddCoupon={handleAddCoupon}
         onDeleteCoupon={handleDeleteCoupon}
         onUpdateCoupon={handleUpdateCoupon}
+        onSave={handleSaveCoupon}
       />
     </div>
   );

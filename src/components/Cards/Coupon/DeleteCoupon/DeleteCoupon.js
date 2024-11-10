@@ -4,6 +4,8 @@ import CouponWebApiService from "../../../../Services/CouponsWebApiService";
 function DeleteCoupon({ couponId, onSave, onDelete }) {
   const [coupon, setCoupon] = useState(null); // Start with null until data is loaded
 
+  console.log("I want to delete coupon");
+
   // Fetch coupon details when component mounts or couponId changes
   useEffect(() => {
     if (couponId) {
@@ -43,10 +45,10 @@ function DeleteCoupon({ couponId, onSave, onDelete }) {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="text"
-        name="category"
-        placeholder="Category"
-        value={coupon.category}
+        type="number"
+        name="id"
+        placeholder="Id"
+        value={coupon.id}
         onChange={handleChange}
       />
       <input
@@ -84,8 +86,15 @@ function DeleteCoupon({ couponId, onSave, onDelete }) {
       />
       <input
         type="text"
+        name="code"
+        placeholder="Code"
+        value={coupon.code}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
         name="image"
-        placeholder="Image"
+        placeholder="Image URL"
         value={coupon.image}
         onChange={handleChange}
       />

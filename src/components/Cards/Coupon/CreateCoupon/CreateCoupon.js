@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import couponWebApiService from "../../../../Services/CouponsWebApiService";
 import notifyService from "../../../../Services/NotificationService";
 import { useNavigate } from "react-router-dom";
+import { number } from "zod";
 
 function CreateCoupon() {
   const [coupon, setCoupon] = useState({
-    category: "",
+    id: number,
     description: "",
     creationDate: new Date().toISOString().slice(0, 10),
     endDate: new Date().toISOString().slice(0, 10),
     amount: 0,
     value: 0,
+    code: "",
     image: "",
   });
 
@@ -45,10 +47,10 @@ function CreateCoupon() {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="text"
-        name="category"
-        placeholder="Category"
-        value={coupon.category}
+        type="number"
+        name="id"
+        placeholder="Id"
+        value={coupon.id}
         onChange={handleChange}
       />
       <input
@@ -82,6 +84,13 @@ function CreateCoupon() {
         name="value"
         placeholder="Value"
         value={coupon.value}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="code"
+        placeholder="Code"
+        value={coupon.code}
         onChange={handleChange}
       />
       <input

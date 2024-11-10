@@ -51,10 +51,10 @@ function UpdateCoupon({ couponId = null, onSave }) {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="text"
-        name="category"
-        placeholder="Category"
-        value={coupon.category}
+        type="number"
+        name="id"
+        placeholder="Id"
+        value={coupon.id}
         onChange={handleChange}
       />
       <input
@@ -92,8 +92,15 @@ function UpdateCoupon({ couponId = null, onSave }) {
       />
       <input
         type="text"
+        name="code"
+        placeholder="Code"
+        value={coupon.code}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
         name="image"
-        placeholder="Image"
+        placeholder="Image URL"
         value={coupon.image}
         onChange={handleChange}
       />

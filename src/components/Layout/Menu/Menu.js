@@ -8,7 +8,6 @@ function Menu() {
 
   return (
     <div className="Menu">
-      {/* <Link to="/home"></Link> */}
       {isAdmin && (
         <Link to="/admin">
           <CouponList />
@@ -23,6 +22,11 @@ function Menu() {
       {isAdmin && (
         <Link to="/admin/coupons/create">
           <button>Add Coupon</button>
+        </Link>
+      )}
+      {isAdmin && (
+        <Link to="admin/coupons/:id/delete">
+          <button>Delete Coupon</button>
         </Link>
       )}
     </div>
