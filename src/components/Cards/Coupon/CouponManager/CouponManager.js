@@ -27,14 +27,27 @@ function CouponManager() {
     }
   };
 
-  const handleAddCoupon = () => {
+  const handleAddCoupon = (id) => {
     navigate("/admin/coupons/add"); // Navigate to CreateCoupon page
   };
 
+  //added now
+  const handleDeleteCoupon = (id) => {
+    navigate(`/admin/coupons/${id}`);
+  };
+
+  const handleUpdateCoupon = (id) => {
+    navigate("/admin/coupons/coupon");
+  };
   return (
     <div>
       {/* Only render the CouponList here */}
-      <CouponList coupons={coupons} onAddCoupon={handleAddCoupon} />
+      <CouponList
+        coupons={coupons}
+        onAddCoupon={handleAddCoupon}
+        onDeleteCoupon={handleDeleteCoupon}
+        onUpdateCoupon={handleUpdateCoupon}
+      />
     </div>
   );
 }

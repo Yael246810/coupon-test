@@ -5,11 +5,10 @@ import UrlService from "./UrlService";
 class MockApiService {
   constructor() {
     this.mock = new MockAdapter(axios);
-    this.coupons = []; // Initialize an empty array to store the coupons
+    this.coupons = [];
   }
 
   startMocks() {
-    // Mock for login
     this.mock.onPost(UrlService.auth + "/login").reply((config) => {
       console.log("Mocked POST request:", config);
       return [
@@ -22,27 +21,76 @@ class MockApiService {
       ];
     });
 
-    // Mock for adding a coupon
     this.mock.onPost(UrlService.admin + "/coupons/add").reply((config) => {
       console.log("Mocked POST request to add coupon:", config.data);
 
-      // Add the new coupon to the list
       const newCoupon = JSON.parse(config.data);
       this.coupons.push(newCoupon);
 
-      // Return the updated list of coupons
       return [
-        200,
+        201,
         {
           message: "Coupon added successfully",
-          coupons: this.coupons, // Send the updated coupon list
+          coupons: this.coupons,
         },
       ];
     });
 
     this.mock.onGet("/admin/coupons").reply(200, {
-      coupons: this.coupons, // Return the stored coupons list
+      coupons: this.coupons,
     });
+
+    this.mock
+      .onDelete(UrlService.admin + "/coupons/:id/delete")
+      .reply((config) => {
+        const couponId = config.url.split("/").pop();
+
+        console.log(
+          "Mocked DELETE request to delete coupon with ID:",
+          couponId
+        );
+
+        this.coupons = this.coupons.filter((coupon) => coupon.id !== couponId);
+
+        return [
+          204,
+          {
+            message: "Coupon Deleted successfully",
+            coupons: this.coupons,
+          },
+        ];
+      });
+
+    this.mock
+      .onPut(UrlService.admin + "/coupons/:id/update")
+      .reply((config) => {
+        const couponId = config.url.split("/").pop();
+        const updatedCouponData = JSON.parse(config.data);
+
+        console.log("Mocked PUT request to update coupon with ID:", couponId);
+        console.log("Updated coupon data:", updatedCouponData);
+
+        let couponFound = false;
+        this.coupons = this.coupons.map((coupon) => {
+          if (coupon.id === couponId) {
+            couponFound = true;
+            return { ...coupon, ...updatedCouponData };
+          }
+          return coupon;
+        });
+
+        if (!couponFound) {
+          return [404, { message: "Coupon not found" }];
+        }
+
+        return [
+          200,
+          {
+            message: "Coupon updated successfully",
+            coupons: this.coupons,
+          },
+        ];
+      });
   }
 
   getCoupons() {
@@ -53,7 +101,7 @@ class MockApiService {
 
   resetMocks() {
     this.mock.reset();
-    this.coupons = []; // Clear the coupons list when resetting mocks
+    this.coupons = [];
   }
 }
 

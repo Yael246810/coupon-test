@@ -9,7 +9,12 @@ import {
   Grid,
 } from "@mui/material";
 
-function CouponList({ coupons = [], onAddCoupon }) {
+function CouponList({
+  coupons = [],
+  onAddCoupon,
+  onDeleteCoupon,
+  onUpdateCoupon,
+}) {
   if (coupons.length === 0) {
     return (
       <div>
@@ -48,11 +53,21 @@ function CouponList({ coupons = [], onAddCoupon }) {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" variant="contained" color="primary">
-                  Apply
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                  onClick={onDeleteCoupon}
+                >
+                  Delete
                 </Button>
-                <Button size="small" variant="outlined" color="secondary">
-                  Share
+                <Button
+                  size="small"
+                  variant="outlined"
+                  color="secondary"
+                  onClick={onUpdateCoupon}
+                >
+                  Update
                 </Button>
               </CardActions>
             </Card>

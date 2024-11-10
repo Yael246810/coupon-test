@@ -21,14 +21,14 @@ class WebApiService {
 
   deleteCoupon(id) {
     return axios.delete(
-      `${UrlService.auth.admin}/coupon/${id}`,
+      `${UrlService.auth.admin}/coupons/${id}/delete`,
       authService.getHeaders()
     );
   }
 
   updateCoupon(coupon) {
     return axios.put(
-      `${UrlService.auth.admin}/coupon`,
+      `${UrlService.auth.admin}/coupons/coupon/update`,
       coupon,
       authService.getHeaders()
     );
