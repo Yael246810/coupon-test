@@ -23,6 +23,9 @@ function CouponList({ coupons = [], onAddCoupon }) {
 
   return (
     <div>
+      <Button variant="contained" color="primary" onClick={onAddCoupon}>
+        Add another coupon
+      </Button>
       <h2>Coupons</h2>
       <Grid container spacing={2}>
         {coupons.map((coupon, index) => (

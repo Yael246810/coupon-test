@@ -27,7 +27,7 @@ class MockApiService {
       console.log("Mocked POST request to add coupon:", config.data);
 
       // Add the new coupon to the list
-      const newCoupon = config.data;
+      const newCoupon = JSON.parse(config.data);
       this.coupons.push(newCoupon);
 
       // Return the updated list of coupons
@@ -40,15 +40,15 @@ class MockApiService {
       ];
     });
 
-    // Optionally, you could add a mock for fetching all coupons
-    this.mock.onGet(UrlService.admin + "/coupons").reply(() => {
-      return [
-        200,
-        {
-          coupons: this.coupons, // Return the stored coupons list
-        },
-      ];
+    this.mock.onGet("/admin/coupons").reply(200, {
+      coupons: this.coupons, // Return the stored coupons list
     });
+  }
+
+  getCoupons() {
+    return axios
+      .get("/admin/coupons")
+      .then((response) => response.data.coupons);
   }
 
   resetMocks() {
