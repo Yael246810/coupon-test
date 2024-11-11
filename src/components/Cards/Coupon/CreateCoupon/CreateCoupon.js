@@ -29,7 +29,7 @@ function CreateCoupon() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    console.log("handle add coupon submit: " + coupon.id);
     couponWebApiService
       .addCoupon(coupon)
       .then((response) => {

@@ -7,12 +7,12 @@ const authService = new AuthorizationService();
 mockService.startMocks();
 
 class WebApiService {
-  login(data) {
-    return axios.post(UrlService.auth + "/login", data);
+  login(email, password) {
+    return axios.post(UrlService.auth + "/login", { email, password });
   }
 
   addCoupon(coupon) {
-    console.log("web add coupon: " + coupon.data);
+    console.log("web add coupon: " + coupon);
     return axios.post(
       `${UrlService.admin}/coupons/add`,
       coupon //      authService.getHeaders()

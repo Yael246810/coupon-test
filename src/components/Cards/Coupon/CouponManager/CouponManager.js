@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CouponList from "./CouponList"; // Import the CouponList
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import MockApiService from "../../../../Services/MockApiService";
 import DeleteCoupon from "../DeleteCoupon/DeleteCoupon";
 
@@ -19,46 +18,60 @@ function CouponManager() {
 
   const handleSaveCoupon = (newCoupon) => {
     console.log("handleSaveCoupon");
-    // if (newCoupon.id) {
-    //   setCoupons((prevCoupons) =>
-    //     prevCoupons.map((coupon) =>
-    //       coupon.id === newCoupon.id ? newCoupon : coupon
-    //     )
-    //   );
-    // } else {
-    //   setCoupons((prevCoupons) => [...prevCoupons, newCoupon]);
-    // }
+    // If you need to handle saving coupons, update the coupon state here.
+    // If updating an existing coupon
+    if (newCoupon.id) {
+      setCoupons((prevCoupons) =>
+        prevCoupons.map((coupon) =>
+          coupon.id === newCoupon.id ? newCoupon : coupon
+        )
+      );
+    } else {
+      setCoupons((prevCoupons) => [...prevCoupons, newCoupon]);
+    }
   };
 
-  const handleAddCoupon = (id) => {
+  const handleAddCoupon = () => {
     navigate("/admin/coupons/add");
   };
-  const handleAddUser = (id) => {
+
+  const handleAddUser = () => {
     navigate("/admin/users/add");
   };
 
-  //added now
+  // Handle delete coupon
   const handleDeleteCoupon = (id) => {
     const couponId = Number(id);
-    setSelectedCouponId(Number(couponId)); // Update the state
-    console.log("1 Selected coupon id is: " + couponId);
-    //navigate(`/admin/coupons/${couponId}/delete`); // Perform the navigation immediately with the id
+    setSelectedCouponId(couponId); // Update the state with the coupon ID to be deleted
+    console.log("Selected coupon ID for deletion: " + couponId);
   };
-
-  // useEffect(() => {
-  //   if (selectedCouponId !== null) {
-  //     console.log("2 Selected coupon id is: " + selectedCouponId);
-  //     navigate(`/admin/coupons/${selectedCouponId}/delete`); // Navigate after the state update
-  //   }
-  // }, [selectedCouponId, navigate]); // Dependency array makes sure this runs when selectedCouponId changes
 
   const handleUpdateCoupon = (id) => {
     console.log("update - this is the couponId " + id);
     navigate(`/admin/coupons/${id}/update`);
   };
+
+  // Function to handle coupon deletion after confirmation in DeleteCoupon
+  const deleteCouponAndUpdateList = (couponId) => {
+    console.log(
+      "this is coupon manager trying to update coupon list" + couponId
+    );
+    setCoupons((prevCoupons) =>
+      prevCoupons.filter((coupon) => coupon.id !== couponId)
+    );
+  };
+
+  const updateCouponList = (newCouponList) => {
+    console.log("updateCouponList: " + newCouponList.length);
+    setCoupons(newCouponList);
+    setSelectedCouponId(null); // Update the state with the coupon ID to be deleted
+    // setCoupons((prevCoupons) =>
+    //   prevCoupons.filter((coupon) => coupon.id !== couponId)
+    // );
+  };
+
   return (
     <div>
-      {/* Only render the CouponList here */}
       <CouponList
         coupons={coupons}
         onAddCoupon={handleAddCoupon}
@@ -67,7 +80,10 @@ function CouponManager() {
         onSave={handleSaveCoupon}
         onAddUser={handleAddUser}
       />
-      <DeleteCoupon couponId={selectedCouponId} />
+      <DeleteCoupon
+        couponId={selectedCouponId}
+        onUpdateCouponList={updateCouponList} // Pass function to update the coupon list
+      />
     </div>
   );
 }

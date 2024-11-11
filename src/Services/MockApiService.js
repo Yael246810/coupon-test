@@ -12,27 +12,47 @@ class MockApiService {
   startMocks() {
     this.mock.onPost(UrlService.auth + "/login").reply((config) => {
       console.log("Mocked POST request:", config);
+
+      // Extracting the email and password from the request body
+      const { email, password } = JSON.parse(config.data);
+      console.log("this is the email " + email);
+      console.log("this is the password " + password);
+
+      if (email === "admin@gmail.com" && password === "1234") {
+        console.log("Im inside the condition of email and password");
+        return [
+          200,
+          {
+            token: "mocked-jwt-token",
+            id: 1,
+            message: "Login successful",
+          },
+        ];
+      }
+      // I need to use a pop message here if the it's not in the list of users
+      // Check the users list for matching credentials
+      const user = this.users.find(
+        (user) => user.email === email && user.password === password
+      );
+
+      if (user) {
+        return [
+          200,
+          {
+            token: "mocked-jwt-token-for-" + email,
+            id: user.id || 2, // For simplicity, use a default ID
+            message: "Login successful",
+          },
+        ];
+      }
+
+      console.log("return invalid credentials ");
+
+      // If no matching user, return an error
       return [
-        200,
+        401,
         {
-          token: "mocked-jwt-token",
-          id: 1,
-          message: "Login successful",
-        },
-      ];
-    });
-
-    this.mock.onPost(UrlService.admin + "/coupons/add").reply((config) => {
-      console.log("Mocked POST request to add coupon:", config.data);
-
-      const newCoupon = JSON.parse(config.data);
-      this.coupons.push(newCoupon);
-
-      return [
-        201,
-        {
-          message: "Coupon added successfully",
-          coupons: this.coupons,
+          message: "Invalid credentials",
         },
       ];
     });
@@ -42,21 +62,42 @@ class MockApiService {
     });
 
     this.mock
-      .onDelete(new RegExp(`${UrlService.admin}/coupons/\\d+/delete`))
+      .onPost(new RegExp(`${UrlService.admin}/coupons/add`))
       .reply((config) => {
         const couponId = config.url.split("/").pop();
 
+        console.log("Mocked add request to delete coupon with ID:", couponId);
+        const newCoupon = JSON.parse(config.data);
+        this.coupons.push(newCoupon);
+
+        return [
+          201,
+          {
+            message: "Coupon created successfully",
+            coupons: this.coupons,
+          },
+        ];
+      });
+
+    this.mock
+      .onDelete(new RegExp(`${UrlService.admin}/coupons/\\d+/delete`))
+      .reply((config) => {
+        const match = config.url.match(/\/coupons\/(\d+)\/delete/); // Capture the ID from the URL
+        const couponId = match ? match[1] : null;
+
         console.log(
-          "Mocked DELETE request to delete coupon with ID:",
-          couponId
+          "Mocked DELETE request to delete coupon with ID:" + couponId
         );
 
+        console.log("before delete " + this.coupons.length);
+        console.log("iddd: " + this.coupons[0].id);
         this.coupons = this.coupons.filter((coupon) => coupon.id !== couponId);
+        console.log("after delete " + this.coupons.length);
 
         return [
           204,
           {
-            message: "Coupon Deleted successfully",
+            message: "Coupon deleted successfully",
             coupons: this.coupons,
           },
         ];
@@ -67,7 +108,9 @@ class MockApiService {
       .reply((config) => {
         console.log("mocking update response");
 
-        const couponId = config.url.split("/").pop();
+        const match = config.url.match(/\/coupons\/(\d+)\/update/); // Capture the ID from the URL
+        const couponId = match ? parseInt(match[1], 10) : null;
+
         console.log("coupon id is  " + couponId);
         const updatedCouponData = JSON.parse(config.data); // update
         console.log("coupon id is " + updatedCouponData); //1
@@ -125,6 +168,7 @@ class MockApiService {
     this.mock.onGet("/admin/users").reply(200, {
       users: this.users,
     });
+    console.log("this is the users list " + this.users);
   }
 
   getCoupons() {
@@ -134,6 +178,7 @@ class MockApiService {
   }
 
   getUsers() {
+    console.log("this is the users list ------- " + this.users);
     return axios.get("/admin/users").then((response) => response.data.users);
   }
 

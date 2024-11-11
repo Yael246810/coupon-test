@@ -33,7 +33,7 @@ function Login() {
     isButtonPressed = true;
 
     return couponWebApiService
-      .login(data)
+      .login(data.email, data.password)
       .then((res) => {
         console.log(
           "Hello, I did login: " +
@@ -65,7 +65,9 @@ function Login() {
         // }
       })
       .catch((err) => {
-        notifyService.error(err);
+        // errors.password.message = err.message;
+        console.log("login error");
+        notifyService.error(err.message);
         isButtonPressed = false;
       });
   };

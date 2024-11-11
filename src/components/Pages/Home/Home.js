@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { TextField, Button, Alert, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import MockApiService from "../../../Services/MockApiService";
+import couponWebApiService from "../../../Services/CouponsWebApiService";
 
 function Home() {
   const [couponCode, SetCouponCode] = useState("");
   const [error, SetError] = useState("");
-  const [cartTotal] = useState(100); // Fixed cart total value (100 shekels)
+  const [cartTotal, setCartTotal] = useState(100); // Fixed cart total value (100 shekels)
+  const [foundCoupon, setFoundCoupon] = useState(null); // State to store found coupon
 
   const navigate = useNavigate();
 
@@ -23,17 +26,39 @@ function Home() {
       );
       return;
     }
+
     SetError("");
-    console.log("coupon code submitted", couponCode);
+    console.log("Coupon code submitted:", couponCode);
+
+    // Find the coupon by code
+    const coupon = couponWebApiService
+      .getCoupons()
+      .find((c) => c.couponCode === couponCode);
+
+    if (coupon) {
+      setFoundCoupon(coupon);
+    } else {
+      SetError("Coupon not found");
+    }
+  };
+
+  const handlePriceCalculation = () => {
+    if (!foundCoupon) {
+      SetError(
+        "Please apply a valid coupon code before calculating the price."
+      );
+      return;
+    }
+
+    if (foundCoupon.isPrecentage) {
+      setCartTotal(cartTotal * (1 - foundCoupon.value / 100));
+    } else {
+      setCartTotal(cartTotal - foundCoupon.value);
+    }
   };
 
   const handleLoginClick = () => {
     navigate("/login");
-  };
-
-  const handlePriceCalculation = () => {
-    // For now, just log the cart total. You can replace this logic with actual price calculations.
-    console.log("Cart total: 100 Shekels");
   };
 
   return (
@@ -48,7 +73,6 @@ function Home() {
         mt: 4,
       }}
     >
-      {/* Coupon Code Input */}
       <TextField
         label="Enter Coupon Code"
         variant="outlined"
@@ -59,7 +83,6 @@ function Home() {
         helperText={error}
       />
 
-      {/* Apply Coupon Button */}
       <Button
         variant="contained"
         color="primary"
@@ -69,16 +92,14 @@ function Home() {
         Apply
       </Button>
 
-      {/* Cart Input (Fixed Value) */}
       <TextField
         label="Shopping Cart Total"
         variant="outlined"
         fullWidth
-        value={`${cartTotal} ₪`} // Display 100 shekels
+        value={`${cartTotal} ₪`}
         disabled
       />
 
-      {/* Calculate Price Button */}
       <Button
         variant="contained"
         color="secondary"
@@ -89,7 +110,6 @@ function Home() {
         Calculate Price
       </Button>
 
-      {/* Login Button */}
       <Button
         variant="outlined"
         color="secondary"
@@ -100,7 +120,6 @@ function Home() {
         Login
       </Button>
 
-      {/* Error Alert */}
       {error && (
         <Alert severity="error" sx={{ width: "100%" }}>
           {error}

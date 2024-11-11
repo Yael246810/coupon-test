@@ -5,6 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { Provider } from "react-redux";
 import store from "./components/Redux/Store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import toastify CSS styles
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -12,6 +14,8 @@ root.render(
   <BrowserRouter>
     <Provider store={store}>
       <App />
+      <ToastContainer position="top-right" autoClose={3000} />{" "}
+      {/* ToastContainer here */}
     </Provider>
   </BrowserRouter>
 );
