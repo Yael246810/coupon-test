@@ -33,6 +33,9 @@ function CouponManager() {
   const handleAddCoupon = (id) => {
     navigate("/admin/coupons/add");
   };
+  const handleAddUser = (id) => {
+    navigate("/admin/users/add");
+  };
 
   //added now
   const handleDeleteCoupon = (id) => {
@@ -42,12 +45,12 @@ function CouponManager() {
     //navigate(`/admin/coupons/${couponId}/delete`); // Perform the navigation immediately with the id
   };
 
-  useEffect(() => {
-    if (selectedCouponId !== null) {
-      console.log("2 Selected coupon id is: " + selectedCouponId);
-      navigate(`/admin/coupons/${selectedCouponId}/delete`); // Navigate after the state update
-    }
-  }, [selectedCouponId, navigate]); // Dependency array makes sure this runs when selectedCouponId changes
+  // useEffect(() => {
+  //   if (selectedCouponId !== null) {
+  //     console.log("2 Selected coupon id is: " + selectedCouponId);
+  //     navigate(`/admin/coupons/${selectedCouponId}/delete`); // Navigate after the state update
+  //   }
+  // }, [selectedCouponId, navigate]); // Dependency array makes sure this runs when selectedCouponId changes
 
   const handleUpdateCoupon = (id) => {
     console.log("update - this is the couponId " + id);
@@ -62,6 +65,7 @@ function CouponManager() {
         onDeleteCoupon={handleDeleteCoupon}
         onUpdateCoupon={handleUpdateCoupon}
         onSave={handleSaveCoupon}
+        onAddUser={handleAddUser}
       />
       <DeleteCoupon couponId={selectedCouponId} />
     </div>

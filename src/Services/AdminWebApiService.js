@@ -1,15 +1,15 @@
 import axios from "axios";
-import AuthorizationService from "..Services/AuthorizationService";
-import UrlService from "..Services/UrlService";
+import AuthorizationService from "./AuthorizationService";
+import UrlService from "./UrlService";
 
 const authService = new AuthorizationService();
 
 class WebApiService {
   addAdmin(admin) {
     return axios.post(
-      `${UrlService.admin}/admin`,
-      admin,
-      authService.getHeathers()
+      `${UrlService.admin}/users/add`,
+      admin
+      // authService.getHeathers()
     );
   }
 }

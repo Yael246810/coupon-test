@@ -71,7 +71,7 @@ function UpdateCoupon({ couponId = null, onSave }) {
         name="id"
         placeholder="Id"
         value={coupon.id}
-        onChange={handleChange}
+        readOnly
       />
       <input
         type="text"

@@ -6,6 +6,7 @@ class MockApiService {
   constructor() {
     this.mock = new MockAdapter(axios);
     this.coupons = [];
+    this.users = [];
   }
 
   startMocks() {
@@ -67,13 +68,24 @@ class MockApiService {
         console.log("mocking update response");
 
         const couponId = config.url.split("/").pop();
-        const updatedCouponData = JSON.parse(config.data);
-
-        console.log("Mocked PUT request to update coupon with ID:", couponId);
+        console.log("coupon id is  " + couponId);
+        const updatedCouponData = JSON.parse(config.data); // update
+        console.log("coupon id is " + updatedCouponData); //1
+        const getCouponById = this.coupons.find(
+          // here is the problem
+          (coupon) => coupon.id === updatedCouponData
+        );
+        console.log(getCouponById);
+        console.log(
+          "Mocked PUT request to update coupon with ID:",
+          getCouponById
+        );
         console.log("Updated coupon data:", updatedCouponData);
 
         let couponFound = false;
+        console.log("coupon wasnt found");
         this.coupons = this.coupons.map((coupon) => {
+          console.log("map the coupon ");
           if (coupon.id === couponId) {
             couponFound = true;
             return { ...coupon, ...updatedCouponData };
@@ -93,12 +105,36 @@ class MockApiService {
           },
         ];
       });
+
+    this.mock.onPost(UrlService.admin + "/users/add").reply((config) => {
+      console.log("Mocked POST request to add user:", config.data);
+
+      const newUser = JSON.parse(config.data);
+      console.log("Im going to push the user into the users list" + newUser); // arrives as object...
+      this.users.push(newUser);
+
+      return [
+        201,
+        {
+          message: "User added successfully",
+          users: this.users,
+        },
+      ];
+    });
+
+    this.mock.onGet("/admin/users").reply(200, {
+      users: this.users,
+    });
   }
 
   getCoupons() {
     return axios
       .get("/admin/coupons")
       .then((response) => response.data.coupons);
+  }
+
+  getUsers() {
+    return axios.get("/admin/users").then((response) => response.data.users);
   }
 
   resetMocks() {

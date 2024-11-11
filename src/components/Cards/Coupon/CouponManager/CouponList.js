@@ -14,6 +14,7 @@ function CouponList({
   onAddCoupon,
   onDeleteCoupon,
   onUpdateCoupon,
+  onAddUser,
 }) {
   if (coupons.length === 0) {
     return (
@@ -21,6 +22,9 @@ function CouponList({
         <h2>There are no coupons at the moment</h2>
         <Button variant="contained" color="primary" onClick={onAddCoupon}>
           Add Coupon
+        </Button>
+        <Button variant="contained" color="primary" onClick={onAddUser}>
+          Add User
         </Button>
       </div>
     );
@@ -30,6 +34,9 @@ function CouponList({
     <div>
       <Button variant="contained" color="primary" onClick={onAddCoupon}>
         Add another coupon
+      </Button>
+      <Button variant="contained" color="primary" onClick={onAddUser}>
+        Add User
       </Button>
       <h2>Coupons</h2>
       <Grid container spacing={2}>

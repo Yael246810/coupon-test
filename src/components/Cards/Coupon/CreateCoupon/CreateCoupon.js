@@ -35,7 +35,6 @@ function CreateCoupon() {
       .then((response) => {
         console.log("Coupon added:", response.data);
         notifyService.success(response.data.message);
-        //To take the coupon list from here: response.data.coupons - and pass it to the CouponList
         navigate("/admin/coupons");
       })
       .catch((error) => {
