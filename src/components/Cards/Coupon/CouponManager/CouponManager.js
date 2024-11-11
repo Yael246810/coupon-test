@@ -48,26 +48,14 @@ function CouponManager() {
 
   const handleUpdateCoupon = (id) => {
     console.log("update - this is the couponId " + id);
+    // setSelectedCouponId(couponId);
     navigate(`/admin/coupons/${id}/update`);
-  };
-
-  // Function to handle coupon deletion after confirmation in DeleteCoupon
-  const deleteCouponAndUpdateList = (couponId) => {
-    console.log(
-      "this is coupon manager trying to update coupon list" + couponId
-    );
-    setCoupons((prevCoupons) =>
-      prevCoupons.filter((coupon) => coupon.id !== couponId)
-    );
   };
 
   const updateCouponList = (newCouponList) => {
     console.log("updateCouponList: " + newCouponList.length);
     setCoupons(newCouponList);
-    setSelectedCouponId(null); // Update the state with the coupon ID to be deleted
-    // setCoupons((prevCoupons) =>
-    //   prevCoupons.filter((coupon) => coupon.id !== couponId)
-    // );
+    setSelectedCouponId(null);
   };
 
   return (

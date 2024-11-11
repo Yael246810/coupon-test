@@ -22,7 +22,6 @@ function DeleteCoupon({ couponId, onUpdateCouponList }) {
         dispatch(deletedCouponAction(couponId));
         console.log("onDeleteCoupon: " + res.data.coupons); // Dispatch action for Redux if needed
         onUpdateCouponList(res.data.coupons);
-        couponId = null;
         navigate("/admin/coupons");
       })
       .catch((err) => notifyService.error(err));

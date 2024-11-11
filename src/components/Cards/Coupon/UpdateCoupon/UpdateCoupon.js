@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import UrlService from "../../../../Services/UrlService";
 import couponWebApiService from "../../../../Services/CouponsWebApiService";
 
-function UpdateCoupon({ couponId = null, onSave }) {
+function UpdateCoupon({ couponId, onUpdateCouponList }) {
   const [coupon, setCoupon] = useState({
     id: null,
     category: "",
@@ -46,14 +44,16 @@ function UpdateCoupon({ couponId = null, onSave }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("update.handleSubmit - couponId:" + coupon.id);
+    console.log("update.handleSubmit - couponId:" + couponId);
 
     setLoading(true);
     couponWebApiService
       .updateCoupon(coupon.id) // Replace with your endpoint
       .then((response) => {
-        setCoupon(response.data);
+        onUpdateCouponList(response.data.coupons);
+        // setCoupon(response.data);
         setLoading(false);
+        // TODO navigate back?
       })
       .catch((error) => {
         console.error("Error fetching coupon:", error);
