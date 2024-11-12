@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CouponList from "./CouponList"; // Import the CouponList
+import CouponList from "./CouponList";
 import { useNavigate } from "react-router-dom";
 import MockApiService from "../../../../Services/MockApiService";
 import DeleteCoupon from "../DeleteCoupon/DeleteCoupon";
@@ -19,8 +19,6 @@ function CouponManager() {
 
   const handleSaveCoupon = (newCoupon) => {
     console.log("handleSaveCoupon");
-    // If you need to handle saving coupons, update the coupon state here.
-    // If updating an existing coupon
     if (newCoupon.id) {
       setCoupons((prevCoupons) =>
         prevCoupons.map((coupon) =>
@@ -40,7 +38,6 @@ function CouponManager() {
     navigate("/admin/users/add");
   };
 
-  // Handle delete coupon
   const handleDeleteCoupon = (id) => {
     const couponId = Number(id);
     setSelectedCouponId(couponId);
@@ -51,12 +48,11 @@ function CouponManager() {
     const couponId = Number(id);
     setSelectedCouponId(couponId);
     console.log("Selected coupon Id for updating " + couponId);
-    // navigate(`/admin/coupons/${id}/update`);
   };
 
   useEffect(() => {
     console.log("Updated selectedCouponId:", selectedCouponId);
-  }, [selectedCouponId]); // Logs selectedCouponId each time it changes
+  }, [selectedCouponId]);
 
   const updateCouponList = (newCouponList) => {
     console.log("updateCouponList: " + newCouponList.length);
@@ -73,12 +69,10 @@ function CouponManager() {
         onUpdateCoupon={handleUpdateCoupon}
         onSave={handleSaveCoupon}
         onAddUser={handleAddUser}
-        // couponId={selectedCouponId}
-        // onUpdateCouponList={updateCouponList}
       />
       <DeleteCoupon
         couponId={selectedCouponId}
-        onUpdateCouponList={updateCouponList} // Pass function to update the coupon list
+        onUpdateCouponList={updateCouponList}
       />
       <UpdateCoupon
         couponId={selectedCouponId}

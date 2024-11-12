@@ -6,7 +6,7 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./components/Redux/Store";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import toastify CSS styles
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -15,7 +15,6 @@ root.render(
     <Provider store={store}>
       <App />
       <ToastContainer position="top-right" autoClose={3000} />{" "}
-      {/* ToastContainer here */}
     </Provider>
   </BrowserRouter>
 );

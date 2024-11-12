@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { TextField, Button, Alert, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import MockApiService from "../../../Services/MockApiService";
 import couponWebApiService from "../../../Services/CouponsWebApiService";
-import CouponType from "../../Cards/Coupon/CouponManager/CouponTypes";
 
 function Home() {
   const [couponCode, SetCouponCode] = useState("");
   const [error, SetError] = useState("");
-  const [cartTotal, setCartTotal] = useState(100); // Fixed cart total value (100 shekels)
-  const [foundCoupon, setFoundCoupon] = useState(null); // State to store found coupon
+  const [cartTotal, setCartTotal] = useState(100);
+  const [foundCoupon, setFoundCoupon] = useState(null);
 
   const navigate = useNavigate();
 
@@ -31,7 +29,6 @@ function Home() {
     SetError("");
     console.log("Coupon code submitted:", couponCode);
 
-    // Find the coupon by code
     const coupon = couponWebApiService
       .getCoupons()
       .find((c) => c.couponCode === couponCode);

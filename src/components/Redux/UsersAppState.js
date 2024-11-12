@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Initial state without TypeScript types
 const initialState = {
   users: [],
 };

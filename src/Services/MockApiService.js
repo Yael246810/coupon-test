@@ -13,7 +13,6 @@ class MockApiService {
     this.mock.onPost(UrlService.auth + "/login").reply((config) => {
       console.log("Mocked POST request:", config);
 
-      // Extracting the email and password from the request body
       const { email, password } = JSON.parse(config.data);
       console.log("this is the email " + email);
       console.log("this is the password " + password);
@@ -29,8 +28,6 @@ class MockApiService {
           },
         ];
       }
-      // I need to use a pop message here if the it's not in the list of users
-      // Check the users list for matching credentials
       const user = this.users.find(
         (user) => user.email === email && user.password === password
       );
@@ -40,7 +37,7 @@ class MockApiService {
           200,
           {
             token: "mocked-jwt-token-for-" + email,
-            id: user.id || 2, // For simplicity, use a default ID
+            id: user.id || 2,
             message: "Login successful",
           },
         ];
@@ -48,7 +45,6 @@ class MockApiService {
 
       console.log("return invalid credentials ");
 
-      // If no matching user, return an error
       return [
         401,
         {
@@ -82,7 +78,7 @@ class MockApiService {
     this.mock
       .onDelete(new RegExp(`${UrlService.admin}/coupons/\\d+/delete`))
       .reply((config) => {
-        const match = config.url.match(/\/coupons\/(\d+)\/delete/); // Capture the ID from the URL
+        const match = config.url.match(/\/coupons\/(\d+)\/delete/);
         const couponId = match ? match[1] : null;
 
         console.log(
@@ -108,12 +104,12 @@ class MockApiService {
       .reply((config) => {
         console.log("mocking update response");
 
-        const match = config.url.match(/\/coupons\/(\d+)\/update/); // Capture the ID from the URL
+        const match = config.url.match(/\/coupons\/(\d+)\/update/);
         const couponId = match ? parseInt(match[1], 10) : null;
 
         console.log("coupon id is  " + couponId);
-        const updatedCouponData = JSON.parse(config.data); // update
-        console.log("coupon id is " + updatedCouponData); //1
+        const updatedCouponData = JSON.parse(config.data);
+        console.log("coupon id is " + updatedCouponData);
         const getCouponById = this.coupons.find(
           // here is the problem
           (coupon) => coupon.id === updatedCouponData
@@ -137,7 +133,7 @@ class MockApiService {
         });
 
         if (!couponFound) {
-          return [404, { message: "Coupon not found" }]; // It falls here, the Update Coupon. To check what to do with it.
+          return [404, { message: "Coupon not found" }];
         }
 
         return [
@@ -153,7 +149,7 @@ class MockApiService {
       console.log("Mocked POST request to add user:", config.data);
 
       const newUser = JSON.parse(config.data);
-      console.log("Im going to push the user into the users list" + newUser); // arrives as object...
+      console.log("Im going to push the user into the users list" + newUser);
       this.users.push(newUser);
 
       return [

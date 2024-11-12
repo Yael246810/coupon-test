@@ -1,11 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Initial state without TypeScript types
 const initialState = {
   id: 0,
-  // token: "",
   email: "",
-  type: "ADMIN", // Assuming ClientType.ADMIN is just a string value
+  type: "ADMIN",
 };
 
 export const ActionType = {
@@ -19,12 +17,10 @@ const userSlice = createSlice({
   reducers: {
     userLoggedInAction(state, action) {
       state.id = action.payload.id;
-      // state.token = action.payload.token;
       state.email = action.payload.email;
       state.type = action.payload.type;
       console.log(
         "new state after login - token= " +
-          // state.token +
           " type = " +
           state.type +
           " email: " +

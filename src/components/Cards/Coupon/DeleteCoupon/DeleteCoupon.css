@@ -45,32 +45,27 @@
     border-radius: 4px;
     cursor: pointer;
     width: 30%;
-    /* Adjust to make buttons less wide */
     transition: background-color 0.1s ease;
 }
 
 .delete-button {
     background-color: #d32f2f;
-    /* Red for delete */
     color: white;
     border: none;
 }
 
 .cancel-button {
     background-color: #f0f0f0;
-    /* Light gray for cancel */
     color: #333;
     border: 1px solid #ddd;
 }
 
 .delete-button:hover {
     background-color: #c62828;
-    /* Darker red on hover */
 }
 
 .cancel-button:hover {
     background-color: #e0e0e0;
-    /* Light gray hover */
 }
 
 .delete-button:focus,

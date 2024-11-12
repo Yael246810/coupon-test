@@ -1,4 +1,3 @@
-/* Create Coupon Form */
 .create-coupon-container {
     display: flex;
     justify-content: center;
@@ -44,9 +43,7 @@
 
 .create-coupon-form button {
     width: auto;
-    /* Less wide button */
     padding: 14px 30px;
-    /* Adjust padding for a more compact button */
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -55,7 +52,6 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
-    /* Space above the button */
     margin-left: auto;
     margin-right: auto;
 }

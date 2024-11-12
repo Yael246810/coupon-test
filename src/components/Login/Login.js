@@ -4,9 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 import notifyService from "../../Services/NotificationService";
 import { useDispatch } from "react-redux";
-import { userLoggedInAction } from "../Redux/UserAppState";
 import { useNavigate } from "react-router-dom";
-import { loggedInAsAdmin } from "../Redux/GuardAppState";
 import couponWebApiService from "../../Services/CouponsWebApiService";
 import "./Login.css";
 
@@ -47,26 +45,8 @@ function Login() {
 
         console.log("login with id: " + res.data.id);
         navigate("/admin/coupons");
-
-        // if (response.status === 200) {
-        //   // Successful login
-        //   console.log(response.data.message); // Login successful
-        //   navigate("/admin/coupons");
-        // }
-
-        // dispatch(userLoggedInAction(newState));
-        // navigate("/admin/coupons");
-
-        // if (data.email === "admin@admin.com") {
-        //   dispatch(loggedInAsAdmin());
-        // }
-
-        // if (data.type === "ADMIN") {
-        //   dispatch(loggedInAsAdmin());
-        // }
       })
       .catch((err) => {
-        // errors.password.message = err.message;
         console.log("login error");
         notifyService.error(err.message);
         isButtonPressed = false;

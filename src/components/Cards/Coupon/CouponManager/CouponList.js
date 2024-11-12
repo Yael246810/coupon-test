@@ -76,7 +76,7 @@ function CouponList({
                   size="small"
                   variant="contained"
                   color="primary"
-                  onClick={() => onDeleteCoupon(Number(coupon.id))} // Pass the coupon ID here
+                  onClick={() => onDeleteCoupon(Number(coupon.id))}
                 >
                   Delete
                 </Button>
@@ -84,7 +84,7 @@ function CouponList({
                   size="small"
                   variant="outlined"
                   color="secondary"
-                  onClick={() => onUpdateCoupon(Number(coupon.id))} // this is the right Id
+                  onClick={() => onUpdateCoupon(Number(coupon.id))}
                 >
                   Update
                 </Button>

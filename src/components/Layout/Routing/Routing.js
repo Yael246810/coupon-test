@@ -1,17 +1,14 @@
 import { Route, Routes } from "react-router-dom";
-import "./Routing.css";
 import App from "../../../App";
 import Page404 from "../../Pages/Page404/Page404";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Login/Login";
-import CreateUser from "../../Cards/Admin/CreateUser";
+import CreateUser from "../../Cards/Admin/CreateUser/CreateUser";
 import Logout from "../../Logout/Logout";
-import { useSelector } from "react-redux";
 import CreateCoupon from "../../Cards/Coupon/CreateCoupon/CreateCoupon";
 import UpdateCoupon from "../../Cards/Coupon/UpdateCoupon/UpdateCoupon";
 import DeleteCoupon from "../../Cards/Coupon/DeleteCoupon/DeleteCoupon";
 import CouponManager from "../../Cards/Coupon/CouponManager/CouponManager";
-import CouponList from "../../Cards/Coupon/CouponManager/CouponList";
 
 function Routing() {
   return (

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "./Menu.css";
 import { useSelector } from "react-redux";
 import CouponList from "../../Cards/Coupon/CouponManager/CouponList";
 

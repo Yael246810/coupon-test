@@ -6,11 +6,7 @@ const authService = new AuthorizationService();
 
 class WebApiService {
   addAdmin(admin) {
-    return axios.post(
-      `${UrlService.admin}/users/add`,
-      admin
-      // authService.getHeathers()
-    );
+    return axios.post(`${UrlService.admin}/users/add`, admin);
   }
 }
 

@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import notifyService from "../../../Services/NotificationService";
+import notifyService from "../../../../Services/NotificationService";
 import { useDispatch } from "react-redux";
-import adminWebApiService from "../../../Services/AdminWebApiService";
-import { addedUserAction } from "../../Redux/UsersAppState";
-import "./CreateUser/CreateUser.css";
+import adminWebApiService from "../../../../Services/AdminWebApiService";
+import { addedUserAction } from "../../../Redux/UsersAppState";
+import "./CreateUser.css";
 
 function AddAdmin() {
   const navigate = useNavigate();
