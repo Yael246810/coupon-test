@@ -27,8 +27,6 @@ function Home() {
     }
 
     SetError("");
-    console.log("Coupon code submitted:", couponCode);
-
     const coupon = couponWebApiService
       .getCoupons()
       .find((c) => c.couponCode === couponCode);

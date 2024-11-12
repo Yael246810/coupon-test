@@ -14,11 +14,8 @@ class MockApiService {
       console.log("Mocked POST request:", config);
 
       const { email, password } = JSON.parse(config.data);
-      console.log("this is the email " + email);
-      console.log("this is the password " + password);
 
       if (email === "admin@gmail.com" && password === "1234") {
-        console.log("Im inside the condition of email and password");
         return [
           200,
           {
@@ -85,10 +82,7 @@ class MockApiService {
           "Mocked DELETE request to delete coupon with ID:" + couponId
         );
 
-        console.log("before delete " + this.coupons.length);
-        console.log("iddd: " + this.coupons[0].id);
         this.coupons = this.coupons.filter((coupon) => coupon.id !== couponId);
-        console.log("after delete " + this.coupons.length);
 
         return [
           204,
@@ -107,14 +101,10 @@ class MockApiService {
         const match = config.url.match(/\/coupons\/(\d+)\/update/);
         const couponId = match ? parseInt(match[1], 10) : null;
 
-        console.log("coupon id is  " + couponId);
         const updatedCouponData = JSON.parse(config.data);
-        console.log("coupon id is " + updatedCouponData);
         const getCouponById = this.coupons.find(
-          // here is the problem
           (coupon) => coupon.id === updatedCouponData
         );
-        console.log(getCouponById);
         console.log(
           "Mocked PUT request to update coupon with ID:",
           getCouponById
@@ -122,9 +112,7 @@ class MockApiService {
         console.log("Updated coupon data:", updatedCouponData);
 
         let couponFound = false;
-        console.log("coupon wasnt found");
         this.coupons = this.coupons.map((coupon) => {
-          console.log("map the coupon ");
           if (coupon.id === couponId) {
             couponFound = true;
             return { ...coupon, ...updatedCouponData };

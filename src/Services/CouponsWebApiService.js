@@ -12,12 +12,10 @@ class WebApiService {
   }
 
   addCoupon(coupon) {
-    console.log("web add coupon: " + coupon);
     return axios.post(`${UrlService.admin}/coupons/add`, coupon);
   }
 
   deleteCoupon(id) {
-    console.log("delete web coupon: " + id);
     return axios.delete(`${UrlService.admin}/coupons/${id}/delete`);
   }
 

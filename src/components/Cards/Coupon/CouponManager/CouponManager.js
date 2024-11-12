@@ -13,12 +13,10 @@ function CouponManager() {
   useEffect(() => {
     MockApiService.getCoupons().then((fetchedCoupons) => {
       setCoupons(fetchedCoupons);
-      console.log(coupons);
     });
   }, []);
 
   const handleSaveCoupon = (newCoupon) => {
-    console.log("handleSaveCoupon");
     if (newCoupon.id) {
       setCoupons((prevCoupons) =>
         prevCoupons.map((coupon) =>
@@ -41,21 +39,16 @@ function CouponManager() {
   const handleDeleteCoupon = (id) => {
     const couponId = Number(id);
     setSelectedCouponId(couponId);
-    console.log("Selected coupon ID for deletion: " + couponId);
   };
 
   const handleUpdateCoupon = (id) => {
     const couponId = Number(id);
     setSelectedCouponId(couponId);
-    console.log("Selected coupon Id for updating " + couponId);
   };
 
-  useEffect(() => {
-    console.log("Updated selectedCouponId:", selectedCouponId);
-  }, [selectedCouponId]);
+  useEffect(() => {}, [selectedCouponId]);
 
   const updateCouponList = (newCouponList) => {
-    console.log("updateCouponList: " + newCouponList.length);
     setCoupons(newCouponList);
     setSelectedCouponId(null);
   };

@@ -19,13 +19,6 @@ const userSlice = createSlice({
       state.id = action.payload.id;
       state.email = action.payload.email;
       state.type = action.payload.type;
-      console.log(
-        "new state after login - token= " +
-          " type = " +
-          state.type +
-          " email: " +
-          state.email
-      );
     },
 
     userLoggedOutAction(state) {

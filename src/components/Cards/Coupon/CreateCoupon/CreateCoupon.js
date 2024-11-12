@@ -45,11 +45,9 @@ function CreateCoupon() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("handle add coupon submit: " + coupon.id);
     couponWebApiService
       .addCoupon(coupon)
       .then((response) => {
-        console.log("Coupon added:", response.data);
         notifyService.success(response.data.message);
         navigate("/admin/coupons");
       })

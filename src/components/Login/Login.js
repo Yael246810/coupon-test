@@ -43,11 +43,9 @@ function Login() {
             data.email
         );
 
-        console.log("login with id: " + res.data.id);
         navigate("/admin/coupons");
       })
       .catch((err) => {
-        console.log("login error");
         notifyService.error(err.message);
         isButtonPressed = false;
       });
