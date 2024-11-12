@@ -1,0 +1,103 @@
+.coupon-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f7f7f7;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+}
+
+.coupon-list-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+}
+
+button,
+button[type="button"],
+button.addUser,
+button.anotherCoupon {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    margin-bottom: 20px;
+    width: auto;
+    display: inline-block;
+    text-align: center;
+}
+
+.anotherCoupon {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    max-width: 180px;
+    width: auto;
+    padding: 3px 7px;
+    text-align: center;
+}
+
+.addUser {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    max-width: 180px;
+    width: auto;
+}
+
+button[type="button"]:hover,
+button.anotherCoupon:hover {
+    background-color: #1976D2;
+    max-width: 100px;
+}
+
+button.addUser:hover {
+    background-color: #1976D2;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.grid-item {
+    width: 100%;
+    max-width: 350px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.grid-item:hover {
+    transform: scale(1.03);
+}
+
+.card-actions button {
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 4px;
+}
+
+.card-actions button.update {
+    background-color: #ff9800;
+    color: white;
+}
+
+.card-actions button.update:hover {
+    background-color: #fb8c00;
+}
+
+.card-actions button.delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.card-actions button.delete:hover {
+    background-color: #e53935;
+}

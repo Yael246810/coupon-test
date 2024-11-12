@@ -8,6 +8,7 @@ import { userLoggedInAction } from "../Redux/UserAppState";
 import { useNavigate } from "react-router-dom";
 import { loggedInAsAdmin } from "../Redux/GuardAppState";
 import couponWebApiService from "../../Services/CouponsWebApiService";
+import "./Login.css";
 
 function Login() {
   const dispatch = useDispatch();
@@ -74,7 +75,6 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>Email:</label>

@@ -19,7 +19,7 @@ const guardSlice = createSlice({
     // Action when the user logs in as an admin
     loggedInAsAdmin(state, action) {
       state.isAdmin = true;
-      state.adminType = action.payload.adminType; // Store the admin type if necessary (e.g., super admin, regular admin)
+      state.adminType = action.payload.adminType;
     },
 
     // Action when the user logs out

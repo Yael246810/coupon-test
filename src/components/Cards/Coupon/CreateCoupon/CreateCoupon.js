@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import couponWebApiService from "../../../../Services/CouponsWebApiService";
 import notifyService from "../../../../Services/NotificationService";
 import { useNavigate } from "react-router-dom";
-import { number } from "zod";
+import CouponTypes from "../CouponManager/CouponTypes";
+import "./CreateCoupon.css";
 
 function CreateCoupon() {
   const [coupon, setCoupon] = useState({
-    id: number,
+    id: 0,
     description: "",
     creationDate: new Date().toISOString().slice(0, 10),
     endDate: new Date().toISOString().slice(0, 10),
     amount: 0,
     value: 0,
+    type: [],
     code: "",
     image: "",
   });
@@ -25,6 +27,20 @@ function CreateCoupon() {
       [name]:
         name === "amount" || name === "value" ? parseInt(value, 10) : value,
     }));
+  };
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    setCoupon((prevCoupon) => {
+      const newTypes = checked
+        ? [...prevCoupon.type, value]
+        : prevCoupon.type.filter((type) => type !== value);
+
+      return {
+        ...prevCoupon,
+        type: newTypes,
+      };
+    });
   };
 
   const handleSubmit = (event) => {
@@ -85,6 +101,24 @@ function CreateCoupon() {
         value={coupon.value}
         onChange={handleChange}
       />
+
+      <div>
+        <h3>Select Coupon Types</h3>
+        {Object.values(CouponTypes).map((type) => (
+          <div key={type}>
+            <input
+              type="checkbox"
+              id={type}
+              name="type"
+              value={type}
+              checked={coupon.type.includes(type)}
+              onChange={handleCheckboxChange}
+            />
+            <label htmlFor={type}>{type}</label>
+          </div>
+        ))}
+      </div>
+
       <input
         type="text"
         name="code"

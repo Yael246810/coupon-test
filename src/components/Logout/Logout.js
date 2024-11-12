@@ -11,7 +11,7 @@ function Logout() {
   const userType = useSelector((state) => state.user.type);
 
   useEffect(() => {
-    dispatch(removeCoupons()); //might need to delete that??
+    dispatch(removeCoupons());
     dispatch(userLoggedOutAction());
     navigate("/login");
   }, [dispatch, navigate, userType]);

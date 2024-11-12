@@ -14,9 +14,6 @@ import CouponManager from "../../Cards/Coupon/CouponManager/CouponManager";
 import CouponList from "../../Cards/Coupon/CouponManager/CouponList";
 
 function Routing() {
-  // const AdminFlag = useSelector((state) => state.guardReducer.isAdmin);
-  const AdminFlag = true; // I need to think what to do here, how to pass the state correctly.
-
   return (
     <div className="Routing">
       <Routes>
@@ -24,30 +21,17 @@ function Routing() {
         <Route path="/home" element={<Home />} />
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
-
-        {AdminFlag && (
-          <Route path="/admin/coupons" element={<CouponManager />} />
-        )}
-
-        {AdminFlag && (
-          <Route path="/admin/users/add" element={<CreateUser />} />
-        )}
-        {AdminFlag && (
-          <Route path="/admin/coupons/add" element={<CreateCoupon />} />
-        )}
-        {AdminFlag && (
-          <Route
-            path="/admin/coupons/:couponId/update"
-            element={<UpdateCoupon />}
-          />
-        )}
-        {AdminFlag && (
-          <Route
-            path="/admin/coupons/:couponId/delete"
-            element={<DeleteCoupon />}
-          />
-        )}
-
+        <Route path="/admin/coupons" element={<CouponManager />} />
+        <Route path="/admin/users/add" element={<CreateUser />} />
+        <Route path="/admin/coupons/add" element={<CreateCoupon />} />
+        <Route
+          path="/admin/coupons/:couponId/update"
+          element={<UpdateCoupon />}
+        />
+        <Route
+          path="/admin/coupons/:couponId/delete"
+          element={<DeleteCoupon />}
+        />
         <Route path="logout" element={<Logout />} />
         <Route path="*" element={<Page404 />} />
       </Routes>

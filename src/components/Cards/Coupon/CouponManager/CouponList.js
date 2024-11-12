@@ -1,4 +1,5 @@
 import React from "react";
+import "./CouponList.css";
 import {
   Card,
   CardContent,
@@ -15,6 +16,7 @@ function CouponList({
   onDeleteCoupon,
   onUpdateCoupon,
   onAddUser,
+  couponId,
 }) {
   if (coupons.length === 0) {
     return (
@@ -32,10 +34,20 @@ function CouponList({
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={onAddCoupon}>
+      <Button
+        className="anotherCoupon"
+        variant="contained"
+        color="primary"
+        onClick={onAddCoupon}
+      >
         Add another coupon
       </Button>
-      <Button variant="contained" color="primary" onClick={onAddUser}>
+      <Button
+        className="addUser"
+        variant="contained"
+        color="primary"
+        onClick={onAddUser}
+      >
         Add User
       </Button>
       <h2>Coupons</h2>
@@ -72,7 +84,7 @@ function CouponList({
                   size="small"
                   variant="outlined"
                   color="secondary"
-                  onClick={() => onUpdateCoupon(Number(coupon.id))}
+                  onClick={() => onUpdateCoupon(Number(coupon.id))} // this is the right Id
                 >
                   Update
                 </Button>

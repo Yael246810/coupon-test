@@ -8,16 +8,10 @@ import { useState } from "react";
 import Login from "./components/Login/Login";
 
 function App() {
-  const [coupons, SetCoupons] = useState([]);
-
   return (
     <div className="App">
       <Header />
       {/* <Home /> */}
-      {/* <CouponManager list={coupons} />
-      <CreateCoupon />
-      <UpdateCoupon />
-      <DeleteCoupon /> */}
       <Menu />
       <Main />
       <Footer />

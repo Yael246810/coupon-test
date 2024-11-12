@@ -1,0 +1,103 @@
+.delete-coupon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+}
+
+.delete-coupon {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.delete-coupon h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.delete-message {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.delete-button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.delete-button,
+.cancel-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 30%;
+    /* Adjust to make buttons less wide */
+    transition: background-color 0.1s ease;
+}
+
+.delete-button {
+    background-color: #d32f2f;
+    /* Red for delete */
+    color: white;
+    border: none;
+}
+
+.cancel-button {
+    background-color: #f0f0f0;
+    /* Light gray for cancel */
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.delete-button:hover {
+    background-color: #c62828;
+    /* Darker red on hover */
+}
+
+.cancel-button:hover {
+    background-color: #e0e0e0;
+    /* Light gray hover */
+}
+
+.delete-button:focus,
+.cancel-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+@media (max-width: 600px) {
+    .delete-coupon {
+        padding: 20px;
+    }
+
+    .delete-coupon h2 {
+        font-size: 20px;
+    }
+
+    .delete-message {
+        font-size: 14px;
+    }
+
+    .delete-button,
+    .cancel-button {
+        font-size: 14px;
+    }
+
+    .delete-button-container {
+        flex-direction: column;
+    }
+}

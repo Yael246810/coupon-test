@@ -3,6 +3,7 @@ import { TextField, Button, Alert, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MockApiService from "../../../Services/MockApiService";
 import couponWebApiService from "../../../Services/CouponsWebApiService";
+import CouponType from "../../Cards/Coupon/CouponManager/CouponTypes";
 
 function Home() {
   const [couponCode, SetCouponCode] = useState("");
@@ -43,17 +44,12 @@ function Home() {
   };
 
   const handlePriceCalculation = () => {
-    if (!foundCoupon) {
-      SetError(
-        "Please apply a valid coupon code before calculating the price."
-      );
-      return;
+    if (foundCoupon.CouponType === "MINUS") {
+      setCartTotal(cartTotal - foundCoupon.value);
     }
 
-    if (foundCoupon.isPrecentage) {
+    if (foundCoupon.CouponType === "PERCENTAGE") {
       setCartTotal(cartTotal * (1 - foundCoupon.value / 100));
-    } else {
-      setCartTotal(cartTotal - foundCoupon.value);
     }
   };
 

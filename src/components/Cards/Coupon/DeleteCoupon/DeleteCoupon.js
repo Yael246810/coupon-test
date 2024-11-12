@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import couponWebApiService from "../../../../Services/CouponsWebApiService";
 import notifyService from "../../../../Services/NotificationService";
 import { deletedCouponAction } from "../../../../components/Redux/CouponAppState";
+import "./DeleteCoupon.css";
 
 function DeleteCoupon({ couponId, onUpdateCouponList }) {
   const dispatch = useDispatch();

@@ -1,3 +1,5 @@
+import "../../Layout/Footer//Footer.css";
+
 function CopyRights() {
   const year = new Date().getFullYear();
   return (
